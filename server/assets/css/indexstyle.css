@@ -1,0 +1,43 @@
+.banner{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 80px;
+    margin-top: 85px;
+}
+.carousel-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.categoria-link{
+    display: flex;
+    justify-content: start;
+    align-items: end;
+    transition: 0.3s;
+}
+.categoria-link:hover{
+    transform: scale(1.05);
+}
+.categoria-img{
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    object-fit: cover;
+    height: 300px;
+    width: 100%;
+}
+.categoria-title{
+    position: absolute;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    border-top: none;
+    border-bottom: none;
+    border-left: none;
+}
+.categoria-text{
+    padding: 7px;
+    background-color: whitesmoke;
+    border-radius: 0px 0px 10px 0px;
+    color: black;
+}

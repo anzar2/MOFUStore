@@ -1,0 +1,73 @@
+.input-search {
+    border: 1px solid white;
+    text-align: center;
+    height: 35px;
+    width: 300px;
+    border-radius: 10px 0px 0px 10px;
+    transition: 0.3s;
+}
+.input-search:focus {
+    outline: none;
+
+}
+.input-s-container{
+    display: flex;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+.input-s-container:hover{
+    display: flex;
+    border: 3px solid white;
+    border-radius: 15px;
+}
+.btn-cart:hover {
+    transform: translateY(-2px);
+    background-color: #3b4249;
+}
+
+.btn-cart {
+    padding: 5px;
+    transition: 0.3s;
+}
+
+.btn-search {
+    border: 1px solid white;
+    border-radius: 0px 10px 10px 0px;
+    height: 35px;
+    padding: 0px 20px;
+    transition: 0.3s;
+}
+
+.btn-search:hover {
+    background-color: rgb(185, 185, 185);
+}
+
+.logo-img {
+    max-width: 150px;
+}
+
+.nav-link {
+    transition: 0.3s ease-out;
+    padding: 5px;
+}
+
+.nav-link:hover {
+    transform: translateY(-2px);
+    border-radius: 5px;
+    background-color: #3b4249;
+}
+
+.navabsolute {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    width: 100%;
+    padding: 30px;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon{
+    transition: 0.3s;
+}
+.carousel-control-prev-icon:hover, .carousel-control-next-icon:hover {
+    transform: scale(2);
+}

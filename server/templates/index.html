@@ -1,0 +1,94 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block titulo %}
+MOFU Store | Home
+{% endblock titulo %}
+{% block styles %}
+<link rel="stylesheet" href="{% static '/css/navstyles.css' %}">
+<link rel="stylesheet" href="{% static '/css/indexstyle.css' %}">
+{% endblock styles %}
+{% block contenido %}
+<header>
+    {% include 'base/navbar_base.html' %}
+</header>
+<main>
+    <section class="banner bg-dark">
+        <h1 class="text-light">BIENVENIDO A MOFU STORE</h1>
+        <span class="text-secondary">La tienda de FUMOS por excelencia! ᗜˬᗜ</span>
+
+    </section>
+    <section class="carousel-container">
+        <section id="fumo-carousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <item class="carousel-item active">
+                    <img src="{% static '/img/carousel-1.png' %}" alt="" class="w-100">
+                </item>
+                <item class="carousel-item">
+                    <img src="{% static '/img/carousel-2.png' %}" alt="" class="w-100">
+                </item>
+                <item class="carousel-item">
+                    <img src="{% static '/img/carousel-3.png' %}" alt="" class="w-100">
+                </item>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#fumo-carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#fumo-carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </section>
+    </section>
+    <section class="container py-5">
+        <h2 class="text-center">Categorias</h2>
+        <div class="row py-3">
+            <article class="categoria col-2 offset-1">
+                <a href="" class="categoria-link">
+                    <div class="categoria-title">
+                        <h6 class="categoria-text">Deka</h6>
+                    </div>
+                    <img src="{% static 'img/Deka_fumo_type/023.jpg' %}" alt="" class="categoria-img">
+                </a>
+            </article>
+            <article class="categoria col-2">
+                <a href="" class="categoria-link">
+                    <div class="categoria-title">
+                        <h6 class="categoria-text">Tradicional</h6>
+                    </div>
+                    <img src="{% static 'img/Fumo_type/006.jpg' %}" alt="" class="categoria-img">
+                </a>
+            </article>
+            <article class="categoria col-2">
+                <a href="" class="categoria-link">
+                    <div class="categoria-title">
+                        <h6 class="categoria-text">Nendoroid</h6>
+                    </div>
+                    <img src="{% static 'img/Nendoroid_type/045.jpg' %}" alt="" class="categoria-img">
+                </a>
+            </article>
+            <article class="categoria col-2">
+                <a href="" class="categoria-link">
+                    <div class="categoria-title">
+                        <h6 class="categoria-text">Puppets</h6>
+                    </div>
+                    <img src="{% static 'img/puppet_type/022.jpg' %}" alt="" class="categoria-img">
+                </a>
+            </article>
+            <article class="categoria col-2">
+                <a href="" class="categoria-link">
+                    <div class="categoria-title">
+                        <h6 class="categoria-text">Strap</h6>
+                    </div>
+                    <img src="{% static 'img/Strap_type/745.jpg' %}" alt="" class="categoria-img">
+                </a>
+            </article>
+
+        </div>
+    </section>
+
+</main>
+<footer>
+
+</footer>
+{% endblock contenido %}

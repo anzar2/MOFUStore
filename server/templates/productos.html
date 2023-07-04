@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block titulo %}
+    MOFU Store | Packs MOFU
+{% endblock titulo %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static '/css/navstyles.css' %}">
+{% endblock styles %}
+{% block contenido %}
+    <header>
+        {% include 'base/navbar_base.html' %}
+     
+    </header>
+    <main style="margin-top: 90px" class="d-flex">
+        <section style="width: 30%;" class="border border-5 border-top-0 border-start-0 border-bottom-0 border-black">
+            <div class="bg-danger">
+                Seccion filtros
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            </div>
+        </section>
+        <section style="width: 70%;">
+            <div class="bg-danger-subtle">
+                Seccion resultado
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            </div>
+        </section>
+    </main>
+    <footer>
+
+    </footer>
+{% endblock contenido %}

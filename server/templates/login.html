@@ -1,0 +1,42 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block titulo %}
+MOFU Store | Login
+{% endblock titulo %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/loginstyle.css' %}">
+{% endblock styles %}
+
+
+{% block contenido %}
+<main>
+    <div class="container bg-white shadow-lg w-50 p-1 d-flex">
+        <section class="login-img-container">
+            <img class="login-img"
+                src="https://ae01.alicdn.com/kf/Ha1676aa517d5401c960c7e86d1f0e2ad3/Peluches-de-Anime-de-20cm-TouHou-Project-Fumo-Plush-Series-Cosplay-mu-eco-de-peluche-mu.jpg_Q90.jpg_.webp"
+                alt="">
+        </section>
+        <section class="form-container">
+            <header>
+                <h1 class="text-secondary">Iniciar sesion</h1>
+            </header>
+
+            <div>
+                <div class="d-flex flex-column">
+                    <input id="user-input" type="text" placeholder="Escribe tu usuario">
+                </div>
+                <div class="d-flex flex-column">
+                    <input id="pass-input" type="text" placeholder="Escribe tu contraseña">
+                </div>
+            </div>
+            <div>
+                <input type="checkbox" name="remember-input" id="remember"><label for="remember-input" class="text-secondary ms-1">Mantener sesion iniciada</label>
+                <a href="">¿Olvidaste tu contraseña?</a>
+            </div>
+            <footer class="w-50">
+                <a href="{% url 'index' %}" class="btn btn-primary w-100">Ingresar</a>
+            </footer>
+        </section>
+    </div>
+</main>
+{% endblock contenido %}

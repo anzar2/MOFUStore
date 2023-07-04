@@ -1,0 +1,48 @@
+{% load static %}
+<nav class="bg-dark navabsolute p-2">
+    <div class="d-flex justify-content-between align-items-center container">
+        <section class="d-flex align-items-center">
+            <section class="d-flex align-items-center">
+                <a href="{% url 'index' %}">
+                    <img class="logo-img" src="{% static 'img/Logo_page.png' %}" alt="">
+                </a>
+                <section class="d-flex container justify-content-center">
+                    <a href="{% url 'index'%}" class="nav-link text-light me-3">Inicio</a>
+                    <a href="{% url 'productos' %}" class="nav-link text-light me-3">Productos</a>
+                    <button class="nav-link me-3 text-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">Categorias</button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'productos' %}">Deka</a></li>
+                        <li><a class="dropdown-item" href="#">Tradicional</a></li>
+                        <li><a class="dropdown-item" href="#">Nendoroid</a></li>
+                        <li><a class="dropdown-item" href="#">Puppet</a></li>
+                        <li><a class="dropdown-item" href="#">Strap</a></li>
+                    </ul>
+                    <!-- <a href="{% url 'promociones' %}" class="nav-link text-light me-3">Packs MOFU</a> -->
+                </section>
+            </section>
+        </section>
+
+        <section class="d-flex justify-content-center">
+            <section class="input-s-container">
+                <input type="text" placeholder="Buscar" class="input-search">
+                <button type="button" class="btn-search">
+                    <img src="{% static 'svg/search.svg' %}" alt="">
+                </button>
+            </section>
+        </section>
+
+        <section class="d-flex align-items-center">
+            <button class="nav-link me-3 text-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">Mi cuenta</button>
+
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Iniciar sesion</a></li>
+                        <li><a class="dropdown-item" href="#">Registrarse</a></li>
+                    </ul>
+            <a href="" class="btn-cart">
+                <img src="{% static 'svg/cart.svg' %}" alt="">
+            </a>
+        </section>
+    </div>
+</nav>
