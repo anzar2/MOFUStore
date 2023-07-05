@@ -1,0 +1,65 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block titulo %}
+MOFU Store | Registro
+{% endblock titulo %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/loginstyle.css' %}">
+{% endblock styles %}
+{% block contenido %}
+<main class=" d-flex justify-content-center">
+    <div class="shadow-lg registro">
+        <section class="registro-form">
+            <h3 class="fw-light mb-3">Crear cuenta</h3>
+            <h6 class="fw-light mb-3">Rellena los campos para continuar con el proceso</h6>
+            <form method="post" class="mb-3">
+                {% csrf_token %}
+                <section class="row">
+                    <div class="col-6">
+                        <label for="first_name">Primer nombre</label>{{registro_form.first_name}}
+                    </div>
+                    <div class="col-6">
+                        <label for="last_name">Segundo nombre</label>{{registro_form.last_name}}
+                    </div>
+                </section>
+                <section class="row">
+                    <div class="col-12">
+                        <label for="email">Correo</label>{{registro_form.email}}
+                    </div>
+                </section>
+                <section class="row">
+                    <div class="col-6">
+                        <label for="password1">Contraseña</label>{{registro_form.password1}}
+                        <p class="fw-light" style="font-size: 14px;">{{registro_form.password1.help_text}}</p>
+                    </div>
+                    <div class="col-6">
+                        <label for="pass2">Repite la contraseña</label>{{registro_form.password2}}
+                        <p class="fw-light" style="font-size: 14px;">{{ registro_form.password2.help_text }}</p>
+                    </div>
+                </section>
+                <section class="row">
+                    <div class="col-12">
+                        <label for="address">Direccion</label>{{registro_form.address}}
+                        <p class="fw-light" style="font-size: 14px;">{{ registro_form.address.help_text }}</p>
+                    </div>
+                </section>
+                <section class="row">
+                    <div class="col-6">
+                        <label for="region">Region</label>{{registro_form.region}}
+                    </div>
+                    <div class="col-6">
+                        <label for="commune">Comuna</label>{{registro_form.commune}}
+                    </div>
+                </section>
+                <section class="row">
+                    <div class="col-12 offset-3 mt-3">
+                        <span class="text-danger fw-light">{{mensaje_error}}</span>
+                        <button type="submit" class="w-50 btn btn-primary">Registrarse</button>
+                    </div>
+                </section>
+                <a href="{% url 'index' %}">Volver a inicio</a>
+            </form>
+        </section>
+    </div>
+</main>
+{% endblock contenido %}

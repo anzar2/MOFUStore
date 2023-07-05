@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block titulo %}
+MOFU Store | Compra realizada
+{% endblock titulo %}
+{% block styles %}
+
+{% endblock styles %}
+{% block contenido %}
+<main>
+    <section class="d-flex justify-content-center align-items-center" style="height: 100vh">
+        <article class="card p-5">
+            <div class="d-flex flex-column align-items-center">
+                <img src="{% static 'img/compra_realizada.png' %}" alt="" class="card-img-top w-50">
+            </div>
+            <div class="card-body d-flex justify-content-center">
+                <h5>Compra confirmada!</h5>
+            </div>
+            <footer class="d-flex justify-content-around">
+                <a href="{% url 'index' %}" class="btn btn-secondary">Volver al inicio</a>
+                <a href="" class="btn btn-success">Ir a mis compras</a>
+            </footer>
+        </article>
+    </section>
+</main>
+{% endblock contenido %}

@@ -9,34 +9,28 @@ MOFU Store | Login
 
 
 {% block contenido %}
-<main>
-    <div class="container bg-white shadow-lg w-50 p-1 d-flex">
+<main class="container">
+    <div class="shadow-lg  bg-dark" id="login-container">
         <section class="login-img-container">
-            <img class="login-img"
-                src="https://ae01.alicdn.com/kf/Ha1676aa517d5401c960c7e86d1f0e2ad3/Peluches-de-Anime-de-20cm-TouHou-Project-Fumo-Plush-Series-Cosplay-mu-eco-de-peluche-mu.jpg_Q90.jpg_.webp"
-                alt="">
+            <img src="{% static 'img/Logo_page.png' %}" alt="" class="login-img">
         </section>
-        <section class="form-container">
+        <form action="" method="post" class="form-container bg-white">
+            {% csrf_token %}
             <header>
-                <h1 class="text-secondary">Iniciar sesion</h1>
+                <h1 class="fw-light mb-5">Iniciar sesion</h1>
             </header>
 
-            <div>
-                <div class="d-flex flex-column">
-                    <input id="user-input" type="text" placeholder="Escribe tu usuario">
-                </div>
-                <div class="d-flex flex-column">
-                    <input id="pass-input" type="text" placeholder="Escribe tu contraseña">
-                </div>
+            <div class="d-flex  align-items-center flex-column">
+                {{ login_form.username }}
+                {{ login_form.password }}
+                <span class="text-danger fw-light">{{mensaje_error}}</span>
+                <a href="{% url 'registro' %}">¿Nuevo en el sitio?</a>
             </div>
-            <div>
-                <input type="checkbox" name="remember-input" id="remember"><label for="remember-input" class="text-secondary ms-1">Mantener sesion iniciada</label>
-                <a href="">¿Olvidaste tu contraseña?</a>
-            </div>
-            <footer class="w-50">
-                <a href="{% url 'index' %}" class="btn btn-primary w-100">Ingresar</a>
+            <footer class="w-50 mt-5">
+                <button type="submit" class="w-100 btn btn-primary">Ingresar</button>
             </footer>
-        </section>
+            <a href="{% url 'index' %}">Volver al inicio</a>
+        </form>
     </div>
 </main>
 {% endblock contenido %}

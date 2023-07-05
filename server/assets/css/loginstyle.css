@@ -6,10 +6,12 @@ main{
     width: 100vw;
 }
 .login-img-container{
+    display: flex;
     width: 50%;   
 }
 .login-img{
     width: 100%;
+    object-fit: contain;
 }
 
 .form-container{
@@ -19,17 +21,44 @@ main{
     align-items: center;
     width: 50%;
     padding: 60px 0px;
-
 }
 
-input#user-input, input#pass-input{
-    outline: none;
-    width: 100%;
-    margin-top: 30px;
-    background-color: rgb(243, 243, 243);
-    border-top: none;
-    border-left: 5px lightblue solid;
-    border-bottom: none;
-    border-right: none;
-    border-radius: 0px 0px 0px 0px;
+.registro{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.registro-form{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 50px;
+}
+#login-container{
+    display: flex;
+    width: 75%;
+}
+@media (max-width: 768px){
+    main.container{
+        padding: 0;
+        margin: 0;
+    }
+    div.shadow-lg{
+        box-shadow: none !important;
+    }
+    .registro-form{
+        width: 100vw !important;
+        height: 100vh !important;
+        
+    }
+    .login-img-container{
+        display: none;
+    }
+    .form-container{
+        width: 100%;
+    }
+    #login-container{
+        width: 100vw;
+    }
 }
