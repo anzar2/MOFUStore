@@ -5,6 +5,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import UserInfoModel, RegionModel, CommuneModel
 
+@login_required
+def mostrar_carrito(request):
+    contexto = {
+        'productos': 0
+    }
+    return render(request, 'carrito.html', contexto)
+
 def mostrar_login(request):
     if request.method == "GET":
         contexto = {

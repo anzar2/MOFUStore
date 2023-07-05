@@ -1,0 +1,38 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block titulo %}
+MOFU Store | Mi carro
+{% endblock titulo %}
+{% block styles %}
+<link rel="stylesheet" href="{% static '/css/navstyles.css' %}">
+{% endblock styles %}
+{% block contenido %}
+<header>
+    {% include 'base\navbar_base.html' %}
+</header>
+<main style="margin-top: 85px; padding: 10px 0px;" class = "container">
+    <h2 class="fw-light">Mi carro</h2>
+    {% if productos > 0 %}
+    <div>
+        <table class="table">
+            <th>N° Producto</th>
+            <th>Nombre producto</th>
+            <th>Cantidad</th>
+            <th></th>
+        </table>
+        <hr>
+        <div class="d-flex justify-content-end">
+            <a href="" class="btn btn-secondary mx-1">Cancelar compra</a>
+            <a href="" class="btn btn-primary ">Confirmar compra</a>
+        </div>
+    </div>
+    {%else%}
+        <div>
+            <h3 class="text-secondary">Aun no tienes productos en tu carro :(</h3>
+            <div>
+                <a href="{% url 'productos' %}" class="btn btn-primary">Ir a la tienda</a>
+            </div>
+        </div>
+    {%endif%}
+</main>
+{%endblock contenido%}

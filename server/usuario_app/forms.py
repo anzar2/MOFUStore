@@ -15,6 +15,9 @@ from .models import (
     RegionModel,
 )
 
+COMUNA_DATA = [(comuna.id, comuna.commune_name) for comuna in CommuneModel.objects.all()]
+REGION_DATA = [(region.id, region.region_name) for region in RegionModel.objects.all()]
+
 class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kargs):
         super().__init__(*args, **kargs)
@@ -27,7 +30,7 @@ class RegistroForm(BaseUserCreationForm):
         self.fields['username'].required = False
         self.fields['first_name'].required = True
         self.fields['last_name'].required = True
-        self.fields['password1'] = CharField(help_text="La contraseña no puede ser de mas de 8 caracteres")
+        self.fields['password1'] = CharField(help_text="La contraseña debe tener minimo 8 caracteres, y debe incluir mayuscula")
         self.fields['password2']= CharField(help_text="Su contraseña no puede ser completamente numerica")
         self.fields['password1'].widget = PasswordInput(attrs = { 'class': 'form-control'})
         self.fields['password2'].widget = PasswordInput(attrs = { 'class': 'form-control'})
@@ -61,8 +64,6 @@ class RegistroForm(BaseUserCreationForm):
         )
     )
 
-    COMUNA_DATA = [(comuna.id, comuna.commune_name) for comuna in CommuneModel.objects.all()]
-    REGION_DATA = [(region.id, region.region_name) for region in RegionModel.objects.all()]
     commune = ChoiceField(
         required=True,
         choices=COMUNA_DATA,
