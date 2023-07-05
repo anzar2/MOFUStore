@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import UserInfoModel, RegionModel, CommuneModel
+from django.db.utils import IntegrityError
 
 @login_required
 def mostrar_carrito(request):
@@ -29,7 +30,7 @@ def mostrar_login(request):
             usuario = authenticate(request, username=correo, password=password)
             if usuario is not None:
                 login(request, usuario)
-                print('Ingreso un usuario')
+                print(f'Ingreso el usuario: {correo}')
                 return redirect('index')
             else:
                 usuario_existe = False
@@ -48,34 +49,44 @@ def mostrar_registro(request):
         }
         return render(request, 'registro.html', contexto)
     elif request.method == "POST":
-        registro_form = RegistroForm(request.POST)
-        if registro_form.is_valid():
-            first_name = registro_form.cleaned_data['first_name']
-            last_name = registro_form.cleaned_data['last_name']
-            password = registro_form.cleaned_data['password1']
-            email = registro_form.cleaned_data['email']
-            address = registro_form.cleaned_data['address']
-            commune_id = registro_form.cleaned_data['commune']
-            region_id = registro_form.cleaned_data['region']
+        try:
+            registro_form = RegistroForm(request.POST)
+            if registro_form.is_valid():
+                first_name = registro_form.cleaned_data['first_name']
+                last_name = registro_form.cleaned_data['last_name']
+                password = registro_form.cleaned_data['password1']
+                email = registro_form.cleaned_data['email']
+                address = registro_form.cleaned_data['address']
+                commune_id = registro_form.cleaned_data['commune']
+                region_id = registro_form.cleaned_data['region']
 
-            region_model = RegionModel.objects.get(id=region_id)
-            commune_model = CommuneModel.objects.get(id=commune_id)
-            user = User.objects.create_user(username=email, password=password, email=email, first_name=first_name,last_name=last_name)
-            userInfo = UserInfoModel.objects.create(address=address,commune=commune_model,user=user)
-
-            print('Se ha registrado un usuario:', user.username)
-            usuario = authenticate(request, username=email, password=password)
-            login(request, usuario)
-            return redirect('index')
-        else:
+                region_model = RegionModel.objects.get(id=region_id)
+                commune_model = CommuneModel.objects.get(id=commune_id)
+                user = User(username=email, password=password, email=email, first_name=first_name,last_name=last_name)
+                userInfo = UserInfoModel(address=address,commune=commune_model,user=user)
+                print('Se ha registrado un usuario:', user.username)
+                user.save()
+                userInfo.save()
+                usuario = authenticate(request, username=email, password=password)
+                login(request, usuario)
+                return redirect('index')
+            else:
+                contexto = {
+                    'registro_form': RegistroForm(),
+                    'mensaje_error': 'Comprueba que los campos cumplan los requerimientos'
+                }
+                return render(request, 'registro.html', contexto)
+            
+        except IntegrityError:
             contexto = {
-                'registro_form': RegistroForm(),
-                'mensaje_error': 'Comprueba que los campos cumplan los requerimientos'
-            }
+                    'registro_form': RegistroForm(),
+                    'error_usuario_existente': 'El usuario ingresado ya existe'
+                }
             return render(request, 'registro.html', contexto)
 
     return render(request, 'registro.html')
 
+@login_required
 def mostrar_c_realizada(request):
     return render(request, 'compra_confirmada.html')
 
