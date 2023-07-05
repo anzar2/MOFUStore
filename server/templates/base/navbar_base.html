@@ -18,37 +18,42 @@
                         <li><a class="dropdown-item" href="#">Puppet</a></li>
                         <li><a class="dropdown-item" href="#">Strap</a></li>
                     </ul>
-             
+
                 </section>
             </section>
         </section>
 
         <section class="d-flex justify-content-center">
-            <section class="input-s-container">
-                <input type="text" placeholder="Buscar" class="input-search">
-                <button type="button" class="btn-search">
-                    <img src="{% static 'svg/search.svg' %}" alt="">
-                </button>
+
+            <section >
+                <form action="{% url 'buscar' %}" class="input-s-container">
+                    <input type="text" placeholder="Buscar" class="input-search" name="search">
+                    <button  class="btn-search" type="submit">
+                        <img src="{% static 'svg/search.svg' %}" alt="">
+                    </button>
+                </form>
             </section>
+
         </section>
 
         <section class="d-flex align-items-center">
-            <button class="nav-link me-3 text-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="nav-link me-3 text-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
                 {% if user.is_authenticated %}
-                    {{ user.first_name }}
+                {{ user.first_name }}
                 {%else %}
-                    Mi cuenta
+                Mi cuenta
                 {%endif%}
             </button>
-                <ul class="dropdown-menu">
-                    {% if user.is_authenticated %}
-                    <li><a class="dropdown-item" href="{% url 'compras' %}">Mis compras</a></li>
-                    <li><a class="dropdown-item" href="{% url 'cerrar_sesion' %}">Cerrar sesion</a></li>
-                    {%else%}
-                    <li><a class="dropdown-item" href="{% url 'login' %}">Iniciar sesion</a></li>
-                    <li><a class="dropdown-item" href="{% url 'registro' %}">Registrarse</a></li>
-                    {%endif%}
-                </ul>
+            <ul class="dropdown-menu">
+                {% if user.is_authenticated %}
+                <li><a class="dropdown-item" href="{% url 'compras' %}">Mis compras</a></li>
+                <li><a class="dropdown-item" href="{% url 'cerrar_sesion' %}">Cerrar sesion</a></li>
+                {%else%}
+                <li><a class="dropdown-item" href="{% url 'login' %}">Iniciar sesion</a></li>
+                <li><a class="dropdown-item" href="{% url 'registro' %}">Registrarse</a></li>
+                {%endif%}
+            </ul>
             <a href="{% url 'carrito' %}" class="btn-cart">
                 <img src="{% static 'svg/cart.svg' %}" alt="">
             </a>

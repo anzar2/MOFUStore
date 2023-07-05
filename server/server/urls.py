@@ -24,6 +24,6 @@ from .views import (
 urlpatterns = [
     path('', mostrar_index, name='index'),
     path('cuenta/', include('usuario_app.urls')),
-    path('productos/', mostrar_productos, name='productos'),
+    path('productos/', include('fumos_app.urls')),
     path('admin/', admin.site.urls)
 ]
