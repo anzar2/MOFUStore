@@ -30,7 +30,7 @@ MOFU Store | Mi carro
                 <td>{{datos.ammount}}</td>
                 <td>{{datos.fumo__fumo_price}}</td>
                 <td>${{datos.total}}</td>
-                <td><button class="btn btn-danger">Del</button></td>
+                <td><a class="btn btn-danger" href="{% url 'quitar_item' datos.fumo_id datos.shopping_cart__id %}">Del</a></td>
             </tr>
             {%endfor%}
         </table>

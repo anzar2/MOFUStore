@@ -6,6 +6,13 @@ MOFU Store | Home
 {% block styles %}
 <link rel="stylesheet" href="{% static '/css/navstyles.css' %}">
 <link rel="stylesheet" href="{% static '/css/indexstyle.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{% static '/css/rainbow.css' %}">
+
 {% endblock styles %}
 {% block contenido %}
 <header>
@@ -13,8 +20,8 @@ MOFU Store | Home
 </header>
 <main>
     <section class="banner bg-dark">
-        <h1 class="text-light">BIENVENIDO A MOFU STORE</h1>
-        <span class="text-secondary">La tienda de FUMOS por excelencia! ᗜˬᗜ</span>
+        <h1 class="rgb" style="font-family: 'Roboto', sans-serif;">- BIENVENIDO A MOFU STORE -</h1>
+        <h3 class="text-center text-light" style="font-family: 'Barlow Condensed', sans-serif;">¡Bienvenido a nuestra tienda virtual de Fumos inspirados en Touhou Project! Aquí encontrarás un mundo lleno de encanto y diversión, donde los personajes de Touhou Project cobran vida en forma de adorables peluches Fumo. Nuestra tienda es el lugar perfecto para los amantes de Touhou Project y aquellos que buscan una dosis de alegría y ternura en sus vidas.</h3>
 
     </section>
     <section class="carousel-container">
@@ -39,53 +46,100 @@ MOFU Store | Home
                 <span class="visually-hidden">Next</span>
             </button>
         </section>
+
     </section>
+
     <section class="container py-5">
-        <h2 class="text-center">Categorias</h2>
+
+        <h2 class="text-center" style="font-family: 'Roboto', sans-serif;">Tipos de Fumos disponibles</h2>
         <div class="row py-3">
             <article class="categoria col-2 offset-1">
-                <a href="{% url 'filtro_deka' %}" class="categoria-link">
-                    <div class="categoria-title">
-                        <h6 class="categoria-text">Deka</h6>
-                    </div>
-                    <img src="{% static 'img/Deka_fumo_type/4.jpg' %}" alt="" class="categoria-img">
+                <a href="" class="categoria-link">
+                    <img src="{% static 'img/icons/5_deka.png' %}" alt="" class="categoria-img">
                 </a>
             </article>
             <article class="categoria col-2">
-                <a href="{% url 'filtro_fumo' %}" class="categoria-link">
-                    <div class="categoria-title">
-                        <h6 class="categoria-text">Tradicional</h6>
-                    </div>
-                    <img src="{% static 'img/Fumo_type/1.jpg' %}" alt="" class="categoria-img">
+                <a href="" class="categoria-link">
+
+                    <img src="{% static 'img/icons/1_fumo.png' %}" alt="" class="categoria-img">
                 </a>
             </article>
             <article class="categoria col-2">
-                <a href="{% url 'filtro_nendoroid' %}" class="categoria-link">
-                    <div class="categoria-title">
-                        <h6 class="categoria-text">Nendoroid</h6>
-                    </div>
-                    <img src="{% static 'img/Nendoroid_type/3.jpg' %}" alt="" class="categoria-img">
+                <a href="" class="categoria-link">
+
+                    <img src="{% static 'img/icons/2_nendoroid.png' %}" alt="" class="categoria-img">
                 </a>
             </article>
             <article class="categoria col-2">
-                <a href="{% url 'filtro_puppet' %}" class="categoria-link">
-                    <div class="categoria-title">
-                        <h6 class="categoria-text">Puppets</h6>
-                    </div>
-                    <img src="{% static 'img/puppet_type/2.jpg' %}" alt="" class="categoria-img">
+                <a href="" class="categoria-link">
+
+                    <img src="{% static 'img/icons/3_puppet.png' %}" alt="" class="categoria-img">
                 </a>
             </article>
             <article class="categoria col-2">
-                <a href="{% url 'filtro_strap' %}" class="categoria-link">
-                    <div class="categoria-title">
-                        <h6 class="categoria-text">Strap</h6>
-                    </div>
-                    <img src="{% static 'img/Strap_type/3.jpg' %}" alt="" class="categoria-img">
+                <a href="" class="categoria-link">
+
+                    <img src="{% static 'img/icons/4_strap.png' %}" alt="" class="categoria-img">
                 </a>
             </article>
 
         </div>
+
+        <h2 class="text-center" style="font-family: 'Roboto', sans-serif;">¡En nuestra tienda virtual, ofrecemos una amplia variedad de productos Fumo para satisfacer tus gustos y preferencias! Descubre la diversidad de opciones que tenemos para ti:</h2>
+
+        <h4 style="font-family: 'Barlow Condensed', sans-serif;">Fumos Tradicionales: Estos son los clásicos y adorables peluches Fumo que capturan la esencia de los personajes de Touhou Project en su forma más tierna y abrazable. Perfectos para coleccionar o regalar a un ser querido.</h4>
+
+        <h4  style="font-family: 'Barlow Condensed', sans-serif;">Fumos Nendoroid: Si eres fan de los famosos Nendoroids, te encantarán los Fumos Nendoroid. Estos peluches exhiben el diseño característico de los Nendoroids, con sus detalles distintivos y expresiones lúdicas, pero en forma de peluche. Son perfectos para exhibir en tu habitación, decorar tu escritorio o simplemente abrazar en esos momentos de comodidad y felicidad.</h4>
+
+        <h4  style="font-family: 'Barlow Condensed', sans-serif;">Fumos Puppet: ¿Alguna vez has soñado con tener un títere de tus personajes favoritos? Con los Fumos Puppet, ese sueño se hace realidad. Estos encantadores peluches cuentan con una estructura interna que les permite moverse y ser manipulados como títeres, brindándote una experiencia única de juego y diversión.</h4>
+
+        <h4  style="font-family: 'Barlow Condensed', sans-serif;">Fumos Toy Strap: ¿Quieres llevar a tus personajes favoritos contigo a todas partes? Los Fumos Toy Strap son pequeños peluches que puedes llevar en tu mochila, bolso o llavero. Son adorables compañeros de viaje que te recordarán a tus personajes favoritos en cualquier momento.</h4>
+
+        <h4  style="font-family: 'Barlow Condensed', sans-serif;">Fumos Deka: Si buscas una versión más grande y abrazable de los Fumos, los Fumos Deka son perfectos para ti. Estos peluches de gran tamaño te permitirán envolverte en un abrazo cálido y reconfortante, mientras disfrutas de la presencia de tus personajes favoritos.</h4>
+
     </section>
+
+
+    <section class="banner bg-dark">
+            <div class="container">
+              <div class="row">
+
+                <div class="col-md-6">
+                  <img src="{% static 'img/icons/Img_Exit.png' %}" width="500" height="300" class="img-fluid" alt="Foto">
+                </div>
+
+                <div class="col-md-6">
+                    <h2 class="text-center text-light" style="font-family: 'Roboto', sans-serif;">¿Quienes somos? </h2>
+
+                    <h5 class="text-light" style="font-family: 'Barlow Condensed', sans-serif;">Somos dos estudiantes entusiastas del instituto Duoc UC, ubicado en la sede de San Bernardo, Chile. Estamos emocionados de compartir contigo nuestra historia y pasión por la programación.</h5>
+
+                    <h5 class="text-light" style="font-family: 'Barlow Condensed', sans-serif;">Nuestros nombres son Marcos Reyes "Marcus", Fernando Duque y Fernando Catalán. Actualmente, estamos cursando la carrera de Analista Programador Computacional en Duoc UC, donde hemos adquirido conocimientos sólidos en programación y desarrollo de software.</h5>
+
+                    <h5 class="text-light" style="font-family: 'Barlow Condensed', sans-serif;">El día que nos asignaron trabajar en el Examen Transversal, decidimos trabajar en grupo los tres, luego de eso nos entregaron el documento de la prueba. Entonces, Marcus decidió hacer un gran cambio...</h5>          
+                    <h2 class="text-center text-light" style="font-family: 'Roboto', sans-serif;">Y de esa manera, nuestro proyecto, ha nacido.</h2>
+                
+                </div>
+                
+                <h5 class="text-light" style="font-family: 'Barlow Condensed', sans-serif;">Esa idea fue como un rayo de inspiración que iluminó nuestras mentes. Nos dimos cuenta de que los peluches Fumo de Touhou Project tenían un encanto único y una base de fanáticos apasionados que podríamos aprovechar. Así que decidimos tomar un giro audaz y aventurarnos en este nuevo proyecto.</h5>          
+                <h5 class="text-light" style="font-family: 'Barlow Condensed', sans-serif;">En nuestra tienda virtual de Fumos, encontrarás una amplia selección de estos adorables compañeros de peluche. Cada Fumo está hecho con materiales de alta calidad para asegurar su suavidad y durabilidad. Estamos comprometidos con la satisfacción de nuestros clientes y nos esforzamos por ofrecer productos que te hagan sonreír y te llenen de alegría.</h5>          
+                
+                <div class="col-md-6">
+                </div>
+
+                <div class="col-md-6">
+                    <h5 class="text-light" style="font-family: 'Barlow Condensed', sans-serif;"></h5>  
+                </div>
+
+                <h5 class="text-light text-center" style="font-family: 'Space Grotesk', sans-serif;">"La vida es como un peluche Fumo, a veces suave y reconfortante, otras veces sorprendente y divertida. Abrace cada momento con alegría y déjese llevar por la magia de lo inesperado."</h5>  
+
+
+
+              </div>
+            </div>
+    </section>
+
+    
+    
 
 </main>
 <footer>
@@ -95,3 +149,4 @@ MOFU Store | Home
 </form>
 </footer>
 {% endblock contenido %}
+

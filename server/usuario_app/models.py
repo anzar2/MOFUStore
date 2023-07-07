@@ -3,7 +3,7 @@ from django.db.models import (
     CharField,
     OneToOneField,
     ForeignKey,
-    DateField,
+    DateTimeField,
     PositiveSmallIntegerField,
     CASCADE
 )
@@ -23,7 +23,7 @@ class UserInfoModel(Model):
     user = OneToOneField(User, on_delete=CASCADE)
 
 class ShoppingCartModel(Model):
-    creation_date = DateField(null=False, blank=False)
+    creation_date = DateTimeField(null=False, blank=False)
     status = CharField(max_length=25, blank=False, null=False)
     user = ForeignKey(User, on_delete=CASCADE)
 

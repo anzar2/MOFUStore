@@ -39,7 +39,7 @@ def agregar_carrito(request, fumo_id):
                         new_detail.save()
                 else:
                     new_cart = ShoppingCartModel(
-                    creation_date= datetime.now().date(),
+                    creation_date= datetime.now(),
                     status="Pendiente",
                     user = usuario
                     )
@@ -49,7 +49,7 @@ def agregar_carrito(request, fumo_id):
                 ammount = cart_form.cleaned_data['ammount']
                 contexto = {'fumo_id': fumo,'ammount': ammount}
                 new_cart = ShoppingCartModel(
-                    creation_date= datetime.now().date(),
+                    creation_date= datetime.now(),
                     status="Pendiente",
                     user = usuario
                 )
@@ -88,11 +88,27 @@ def mostrar_c_cancelada(request):
         return redirect('index')
     except:
         return redirect('index')
+    
+@login_required
+def quitar_item_carrito(request, fumo_id, shopping_cart_id):
+    cart_user = ShoppingCartModel.objects.filter(user_id=request.user.id, status="Pendiente")
+    cart_detail_fumo = CartDetailModel.objects.filter(user_id=request.user.id, fumo_id=fumo_id)
+    cart_detail = CartDetailModel.objects.filter(user_id=request.user.id, shopping_cart__id=shopping_cart_id)
+    cart_detail_fumo.delete()
+    # Aqui se supone que la query cart_detail tiene todos los productos agregados al carro, 
+    # y si la cantidad de productos del carro es menor a 1, se asume que la compra se cancela
+    if cart_detail.count() < 1:
+        cart_user = ShoppingCartModel.objects.get(user_id=request.user.id, status="Pendiente")
+        cart_user.status = "Cancelado"
+        cart_user.save()
+    print(cart_detail.count())
+    print(cart_detail_fumo.values())
+    return redirect('carrito')
 
 @login_required
 def mostrar_carrito(request):
     cart_user = ShoppingCartModel.objects.filter(user_id=request.user.id, status="Pendiente")
-    cart_detail = CartDetailModel.objects.filter(user_id=request.user.id, shopping_cart__status = "Pendiente").values('fumo_id','fumo__fumo_name','fumo__fumo_price').distinct().annotate(ammount=Count('fumo_id'), total=Sum('fumo__fumo_price'))
+    cart_detail = CartDetailModel.objects.filter(user_id=request.user.id, shopping_cart__status = "Pendiente").values('fumo_id','fumo__fumo_name','fumo__fumo_price', 'shopping_cart__id').distinct().annotate(ammount=Count('fumo_id'), total=Sum('fumo__fumo_price'))
     total = CartDetailModel.objects.filter(user_id=request.user.id, shopping_cart__status = "Pendiente").aggregate(value=Sum('fumo__fumo_price'))
     existe = cart_user.exists()
     contexto = {
