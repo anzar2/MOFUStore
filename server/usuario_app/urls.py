@@ -1,4 +1,6 @@
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 from .views import (
     mostrar_login,
     mostrar_registro,
@@ -10,7 +12,7 @@ from .views import (
 urlpatterns = [
     path('entrar/', mostrar_login, name='login'),
     path('crear/', mostrar_registro, name='registro'),
-    path('miscompras/', include('compras_app.urls')),
+    # path('miscompras/', include('compras_app.urls')),
     path('micarro/', mostrar_carrito, name="carrito"),
     path('compra_realizada/', mostrar_c_realizada, name='compra_realizada'),
     path('cerrar_sesion/', cerrar_sesion, name='cerrar_sesion'),

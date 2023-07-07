@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from .models import FumoModel, FumoSeriesModel
-from django.db.models import Q
 
 def mostrar_productos(request):
     fumos_all = FumoModel.objects.all()
@@ -47,7 +46,7 @@ def filtrar_deka(request):
 def buscar_fumo(request):
     search = request.GET.get('search')
     if search:
-        fumos_search = FumoModel.objects.filter(Q(fumo_name__icontains = search))
+        fumos_search = FumoModel.objects.filter(fumo_name__icontains = search)
         contexto = {
         'fumo_model': fumos_search
         }

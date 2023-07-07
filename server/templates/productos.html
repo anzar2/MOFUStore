@@ -7,19 +7,57 @@
     <link rel="stylesheet" href="{% static '/css/navstyles.css' %}">
 {% endblock styles %}
 {% block contenido %}
-    <header>
+    <header class="bg-dark py-5">
         {% include 'base/navbar_base.html' %}
-     
-    </header>
-    <main style="margin-top: 90px" class="d-flex">
-        {% for fumos in fumo_model %}
-            <ul>
-                <li>{{fumos.id}}</li>
-                <li>{{fumos.fumo_name}}</li>
-            </ul>
-        {% endfor %}
-    </main>
-    <footer>
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Nuestros productos</h1>
+                <p class="lead fw-normal text-white-50 mb-0">Nuestros Fumos son suaves, tiernos y perfectamente abrazables. Están confeccionados con materiales de alta calidad para garantizar su durabilidad y resistencia. Cada detalle, desde los adorables rostros hasta los accesorios distintivos, ha sido meticulosamente elaborado para crear peluches que te harán sonreír. ᗜˬᗜ</p>
+            </div>
 
-    </footer>
+        </div>
+    </header>
+
+    <style>
+        .product-card {
+          flex: 0 0 25%; 
+          margin-bottom: 20px; 
+          padding: 0 10px; 
+        }
+
+        .product-image {
+         max-width: 100%;
+        height: auto;
+        }
+      </style>
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+          <div class="d-flex flex-wrap justify-content-center">
+            {% for fumo in fumo_model %}
+                <div class="product-card">
+                <div class="card h-100">
+                    <img class="card-img-top" src="{% static fumo.url_img.url %}"  alt="..." /> 
+                    <div class="card-body p-4">
+                    <div class="text-center">
+                        <a href=""> <h5 class="fw-bolder">{{fumo.fumo_name}}</h5> </a> 
+                        ${{fumo.fumo_price}}
+                    </div>
+                    </div>
+                    <div class="text-center"><a class="btn btn-primary mt-auto" href="#">Agregar al carrito</a></div>
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                    <div class="text-center"><a class="btn btn-secondary mt-auto" href="#">Ver detalles</a></div>
+                    </div>
+                </div>
+                </div>
+            {%endfor%}
+
+          </div>
+        </div>
+      </section>
+      
+    
+
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    
 {% endblock contenido %}
