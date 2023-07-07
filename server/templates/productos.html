@@ -49,44 +49,47 @@ MOFU Store | Packs MOFU
             </div>
           </div>
           <div class="text-center">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-              data-bs-target="#staticBackdrop{{ fumo.id }}">
-              Agregar al carrito
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="staticBackdrop{{ fumo.id }}" data-bs-backdrop="static" data-bs-keyboard="false"
-              tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar al carro</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <form action="{% url 'agregar_carro' fumo.id %}" method="post">
-                    {% csrf_token %}
-                    <div class="modal-body">
-                      <div class="row">
-                        <div class="col-12 text-start">
-                          <p class="fw-bold">Producto: <span class="fw-normal">{{ fumo.fumo_name }}</span></p>
-                        </div>
-                        <div class="col-12 text-start">
-                          <p class="fw-bold">Precio unitario: <span class="fw-normal">${{ fumo.fumo_price }}</span></p>
-                        </div>
-                        <div class="col-12">
-                          <label for="cart_form">Cantidad:</label>{{ cart_form.ammount }}
+          {% if fumo.stock > 1 %}
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop{{ fumo.id }}">
+                Agregar al carrito
+              </button>
+          {% else %}
+              <button class="btn btn-primary" disabled>Sin stock :(</button>
+          {%endif%}
+              <!-- Modal -->
+              <div class="modal fade" id="staticBackdrop{{ fumo.id }}" data-bs-backdrop="static" data-bs-keyboard="false"
+                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar al carro</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{% url 'agregar_carro' fumo.id %}" method="post">
+                      {% csrf_token %}
+                      <div class="modal-body">
+                        <div class="row">
+                          <div class="col-12 text-start">
+                            <p class="fw-bold">Producto: <span class="fw-normal">{{ fumo.fumo_name }}</span></p>
+                          </div>
+                          <div class="col-12 text-start">
+                            <p class="fw-bold">Precio unitario: <span class="fw-normal">${{ fumo.fumo_price }}</span></p>
+                          </div>
+                          <div class="col-12">
+                            <label for="cart_form">Cantidad:</label>{{ cart_form.ammount }}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                      <button type="submit" class="btn btn-primary">Agregar</button>
-                    </div>
-                  </form>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
           <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
             <div class="text-center"><a class="btn btn-secondary mt-auto" href="#">Ver detalles</a></div>
           </div>

@@ -56,12 +56,12 @@ def agregar_carrito(request, fumo_id):
                 new_cart.save()
 
                 for n in range(ammount):
-                        new_detail = CartDetailModel(
-                        fumo=fumo,
-                        shopping_cart=new_cart,
-                        user=usuario
-                        )
-                        new_detail.save()
+                    new_detail = CartDetailModel(
+                    fumo=fumo,
+                    shopping_cart=new_cart,
+                    user=usuario
+                    )
+                    new_detail.save()
                 
     return render(request, 'compras.html', contexto)
 
