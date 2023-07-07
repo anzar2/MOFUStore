@@ -2,14 +2,104 @@ from django.shortcuts import render, redirect
 from .forms import RegistroForm, LoginForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from .models import UserInfoModel, RegionModel, CommuneModel
 from django.db.utils import IntegrityError
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.models import User
+from django.db.models import Count, Sum
+import fumos_app.models as fumos_app
+from .forms import CartForm
+from .models import (
+    CartDetailModel,
+    ShoppingCartModel
+)
+from datetime import datetime
+
+def agregar_carrito(request, fumo_id):
+    if request.method == 'POST':
+        fumo = fumos_app.FumoModel.objects.get(id=fumo_id)
+        usuario = User.objects.get(id=request.user.id)
+        cart_form = CartForm(request.POST)
+        if cart_form.is_valid():
+            try:
+                cart_user = ShoppingCartModel.objects.get(user_id=request.user.id, status="Pendiente")
+                ammount = cart_form.cleaned_data['ammount']
+                contexto = {
+                    'fumo_id': fumo,
+                    'ammount': ammount
+                }
+                last_cart = ShoppingCartModel.objects.filter(user_id=request.user.id).order_by('-creation_date').first()
+                if cart_user.status == 'Pendiente':
+                    for n in range(ammount):
+                        new_detail = CartDetailModel(
+                        fumo=fumo,
+                        shopping_cart=last_cart,
+                        user=usuario
+                        )
+                        new_detail.save()
+                else:
+                    new_cart = ShoppingCartModel(
+                    creation_date= datetime.now().date(),
+                    status="Pendiente",
+                    user = usuario
+                    )
+                    new_cart.save()
+
+            except ObjectDoesNotExist:
+                ammount = cart_form.cleaned_data['ammount']
+                contexto = {'fumo_id': fumo,'ammount': ammount}
+                new_cart = ShoppingCartModel(
+                    creation_date= datetime.now().date(),
+                    status="Pendiente",
+                    user = usuario
+                )
+                new_cart.save()
+
+                for n in range(ammount):
+                        new_detail = CartDetailModel(
+                        fumo=fumo,
+                        shopping_cart=new_cart,
+                        user=usuario
+                        )
+                        new_detail.save()
+                
+    return render(request, 'compras.html', contexto)
+
+@login_required
+def mostrar_c_realizada(request):
+    try:
+        cart_detail = CartDetailModel.objects.filter(user_id=request.user.id).values('fumo_id').distinct().annotate(ammount=Count('fumo_id'))
+        cart_user = ShoppingCartModel.objects.get(user_id=request.user.id, status="Pendiente")
+        for datos in cart_detail:
+            fumo = fumos_app.FumoModel.objects.get(id=datos['fumo_id'])
+            fumo.stock -= datos['ammount']
+            fumo.save()
+        cart_user.status = "Confirmado"
+        cart_user.save()
+        return render(request, 'compra_confirmada.html')
+    except:
+        return redirect('index')
+@login_required
+def mostrar_c_cancelada(request):
+    try:
+        cart_user = ShoppingCartModel.objects.get(user_id=request.user.id, status="Pendiente")
+        cart_user.status = "Cancelada"
+        cart_user.save()
+        return redirect('index')
+    except:
+        return redirect('index')
 
 @login_required
 def mostrar_carrito(request):
+    cart_user = ShoppingCartModel.objects.filter(user_id=request.user.id, status="Pendiente")
+    cart_detail = CartDetailModel.objects.filter(user_id=request.user.id).values('fumo_id','fumo__fumo_name','fumo__fumo_price').distinct().annotate(ammount=Count('fumo_id'), total=Sum('fumo__fumo_price'))
+    total = CartDetailModel.objects.filter(user_id=request.user.id).aggregate(value=Sum('fumo__fumo_price'))
+    existe = cart_user.exists()
     contexto = {
-        'productos': 1
+        'tiene_carro': existe,
+        'datos_carro': cart_user,
+        'detalle': cart_detail,
+        'total': total
     }
     return render(request, 'carrito.html', contexto)
 
@@ -91,9 +181,6 @@ def mostrar_registro(request):
             }
             return render(request, 'registro.html', contexto)
     return render(request, 'registro.html')
-@login_required
-def mostrar_c_realizada(request):
-    return render(request, 'compra_confirmada.html')
 
 def cerrar_sesion(request):
     if request.user.is_authenticated:

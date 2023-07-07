@@ -9,6 +9,7 @@ from django.forms import (
     Select
 )
 from django.contrib.auth.forms  import BaseUserCreationForm, AuthenticationForm
+from django.forms import Form
 from django.contrib.auth.models import User
 from .models import (
     CommuneModel,
@@ -79,6 +80,20 @@ class RegistroForm(BaseUserCreationForm):
         widget= Select(
             attrs={
                 'class': 'form-select'
+            }
+        )
+    )
+
+class CartForm(Form):
+    ammount = IntegerField(
+        required=True,
+        max_value=99,
+        min_value=1,
+        widget= NumberInput(
+            attrs= {
+                'class': 'form-control',
+                'name': 'cart_form',
+                'id': 'cart_form'
             }
         )
     )

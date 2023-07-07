@@ -1,10 +1,14 @@
 from django.shortcuts import render
 from .models import FumoModel, FumoSeriesModel
+from usuario_app.forms import CartForm
 
 def mostrar_productos(request):
     fumos_all = FumoModel.objects.all()
+    cart_form = CartForm()
+
     contexto = {
-        'fumo_model': fumos_all
+        'fumo_model': fumos_all,
+        'cart_form': cart_form
     }
     return render(request, 'productos.html', contexto)
 

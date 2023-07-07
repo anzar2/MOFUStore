@@ -89,6 +89,9 @@ MOFU Store | Home
 
 </main>
 <footer>
-
+<form action="" method="post" enctype="multipart/form-data">
+    {%csrf_token%}
+    {{ form.image }} <button type="submit">Enviar</button>
+</form>
 </footer>
 {% endblock contenido %}

@@ -10,29 +10,46 @@ MOFU Store | Mi carro
 <header>
     {% include 'base\navbar_base.html' %}
 </header>
-<main style="margin-top: 85px; padding: 10px 0px;" class = "container">
+<main style="margin-top: 85px; padding: 10px 0px;" class="container">
     <h2 class="fw-light">Mi carro</h2>
-    {% if productos > 0 %}
+    {% if tiene_carro %}
     <div>
         <table class="table">
-            <th>N° Producto</th>
-            <th>Nombre producto</th>
-            <th>Cantidad</th>
-            <th></th>
+            <tr>
+                <th>N° Producto</th>
+                <th>Nombre producto</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+            {% for datos in detalle %}
+            <tr>
+                <td>{{datos.fumo_id}}</td>
+                <td>{{datos.fumo__fumo_name}}</td>
+                <td>{{datos.ammount}}</td>
+                <td>{{datos.fumo__fumo_price}}</td>
+                <td>${{datos.total}}</td>
+                <td><button class="btn btn-danger">Del</button></td>
+            </tr>
+            {%endfor%}
         </table>
+        <div class="d-flex justify-content-end">
+            <h5>Total: ${{total.value}}</h5> 
+        </div>
         <hr>
         <div class="d-flex justify-content-end">
-            <a href="" class="btn btn-secondary mx-1">Cancelar compra</a>
-            <a href="" class="btn btn-primary ">Confirmar compra</a>
+            <a href="{% url 'compra_cancelada' %}" class="btn btn-secondary mx-1">Cancelar compra</a>
+            <a href="{% url 'compra_realizada' %}" class="btn btn-primary ">Confirmar compra</a>
         </div>
     </div>
     {%else%}
+    <div>
+        <h3 class="text-secondary">Aun no tienes productos en tu carro :(</h3>
         <div>
-            <h3 class="text-secondary">Aun no tienes productos en tu carro :(</h3>
-            <div>
-                <a href="{% url 'productos' %}" class="btn btn-primary">Ir a la tienda</a>
-            </div>
+            <a href="{% url 'productos' %}" class="btn btn-primary">Ir a la tienda</a>
         </div>
+    </div>
     {%endif%}
 </main>
 {%endblock contenido%}

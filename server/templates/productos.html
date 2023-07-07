@@ -1,63 +1,106 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block titulo %}
-    MOFU Store | Packs MOFU
+MOFU Store | Packs MOFU
 {% endblock titulo %}
 {% block styles %}
-    <link rel="stylesheet" href="{% static '/css/navstyles.css' %}">
+<link rel="stylesheet" href="{% static '/css/navstyles.css' %}">
 {% endblock styles %}
 {% block contenido %}
-    <header class="bg-dark py-5">
-        {% include 'base/navbar_base.html' %}
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">Nuestros productos</h1>
-                <p class="lead fw-normal text-white-50 mb-0">Nuestros Fumos son suaves, tiernos y perfectamente abrazables. Están confeccionados con materiales de alta calidad para garantizar su durabilidad y resistencia. Cada detalle, desde los adorables rostros hasta los accesorios distintivos, ha sido meticulosamente elaborado para crear peluches que te harán sonreír. ᗜˬᗜ</p>
+<header class="bg-dark py-5">
+  {% include 'base/navbar_base.html' %}
+  <div class="container px-4 px-lg-5 my-5">
+    <div class="text-center text-white">
+      <h1 class="display-4 fw-bolder">Nuestros productos</h1>
+      <p class="lead fw-normal text-white-50 mb-0">Nuestros Fumos son suaves, tiernos y perfectamente abrazables. Están
+        confeccionados con materiales de alta calidad para garantizar su durabilidad y resistencia. Cada detalle, desde
+        los adorables rostros hasta los accesorios distintivos, ha sido meticulosamente elaborado para crear peluches
+        que te harán sonreír. ᗜˬᗜ</p>
+    </div>
+
+  </div>
+</header>
+
+<style>
+  .product-card {
+    flex: 0 0 25%;
+    margin-bottom: 20px;
+    padding: 0 10px;
+  }
+
+  .product-image {
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+<section class="py-5">
+  <div class="container px-4 px-lg-5 mt-5">
+    <div class="d-flex flex-wrap justify-content-center">
+      {% for fumo in fumo_model %}
+      <div class="product-card">
+        <div class="card h-100">
+          <img class="card-img-top" src="{% static fumo.url_img.url %}" alt="..." />
+          <div class="card-body p-4">
+            <div class="text-center">
+              <a href="">
+                <h5 class="fw-bolder">{{fumo.fumo_name}}</h5>
+              </a>
+              ${{fumo.fumo_price}} Stock: {{fumo.stock}}
             </div>
+          </div>
+          <div class="text-center">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop{{ fumo.id }}">
+              Agregar al carrito
+            </button>
 
-        </div>
-    </header>
-
-    <style>
-        .product-card {
-          flex: 0 0 25%; 
-          margin-bottom: 20px; 
-          padding: 0 10px; 
-        }
-
-        .product-image {
-         max-width: 100%;
-        height: auto;
-        }
-      </style>
-    <section class="py-5">
-        <div class="container px-4 px-lg-5 mt-5">
-          <div class="d-flex flex-wrap justify-content-center">
-            {% for fumo in fumo_model %}
-                <div class="product-card">
-                <div class="card h-100">
-                    <img class="card-img-top" src="{% static fumo.url_img.url %}"  alt="..." /> 
-                    <div class="card-body p-4">
-                    <div class="text-center">
-                        <a href=""> <h5 class="fw-bolder">{{fumo.fumo_name}}</h5> </a> 
-                        ${{fumo.fumo_price}}
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop{{ fumo.id }}" data-bs-backdrop="static" data-bs-keyboard="false"
+              tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <form action="{% url 'agregar_carro' fumo.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-12 text-start">
+                          <p class="fw-bold">Producto: <span class="fw-normal">{{ fumo.fumo_name }}</span></p>
+                        </div>
+                        <div class="col-12 text-start">
+                          <p class="fw-bold">Precio unitario: <span class="fw-normal">${{ fumo.fumo_price }}</span></p>
+                        </div>
+                        <div class="col-12">
+                          <label for="cart_form">Cantidad:</label>{{ cart_form.ammount }}
+                        </div>
+                      </div>
                     </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                      <button type="submit" class="btn btn-primary">Agregar</button>
                     </div>
-                    <div class="text-center"><a class="btn btn-primary mt-auto" href="#">Agregar al carrito</a></div>
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                    <div class="text-center"><a class="btn btn-secondary mt-auto" href="#">Ver detalles</a></div>
-                    </div>
+                  </form>
                 </div>
-                </div>
-            {%endfor%}
-
+              </div>
+            </div>
+          </div>
+          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center"><a class="btn btn-secondary mt-auto" href="#">Ver detalles</a></div>
           </div>
         </div>
-      </section>
-      
-    
+      </div>
+      {%endfor%}
 
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    </div>
+  </div>
+</section>
 
-    
+
+
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+
 {% endblock contenido %}
