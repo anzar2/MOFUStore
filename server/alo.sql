@@ -24,3 +24,11 @@ INSERT INTO fumos_app_fumomodel (id, fumo_name, release_year, fumo_price, fumo_s
 (23, 'FumoFumo Scarlet Remilia Ver 2 Deka', 2019, 40990, '60cm', 'foto_fumo/deka_11.jpg', 5, 115),
 (24, 'FumoFumo Scarlet Flandre Ver 2 Deka', 2019, 40990, '60cm', 'foto_fumo/deka_12.jpg', 5, 125),
 (25, 'FumoFumo Izayoi Sakuya Deka', 2019, 40990, '60cm', 'foto_fumo/deka_13.jpg', 5, 135);
+
+INSERT INTO fumos_app_fumoseriesmodel (id, name_series)
+VALUES 
+(1, 'Fumo'),
+(2, 'Nendoroid'),
+(3, 'Puppet'),
+(4, 'Strap'),
+(5, 'Deka');

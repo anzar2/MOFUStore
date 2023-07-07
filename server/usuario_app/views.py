@@ -92,8 +92,8 @@ def mostrar_c_cancelada(request):
 @login_required
 def mostrar_carrito(request):
     cart_user = ShoppingCartModel.objects.filter(user_id=request.user.id, status="Pendiente")
-    cart_detail = CartDetailModel.objects.filter(user_id=request.user.id).values('fumo_id','fumo__fumo_name','fumo__fumo_price').distinct().annotate(ammount=Count('fumo_id'), total=Sum('fumo__fumo_price'))
-    total = CartDetailModel.objects.filter(user_id=request.user.id).aggregate(value=Sum('fumo__fumo_price'))
+    cart_detail = CartDetailModel.objects.filter(user_id=request.user.id, shopping_cart__status = "Pendiente").values('fumo_id','fumo__fumo_name','fumo__fumo_price').distinct().annotate(ammount=Count('fumo_id'), total=Sum('fumo__fumo_price'))
+    total = CartDetailModel.objects.filter(user_id=request.user.id, shopping_cart__status = "Pendiente").aggregate(value=Sum('fumo__fumo_price'))
     existe = cart_user.exists()
     contexto = {
         'tiene_carro': existe,
