@@ -50,7 +50,6 @@
                     {% if user.is_staff %}
                         <li><a class="dropdown-item" href="{% url 'admin' %}">Administrar pagina</a></li>
                     {% endif %}
-                <li><a class="dropdown-item" href="">Mis compras</a></li>
                 <li><a class="dropdown-item" href="{% url 'cerrar_sesion' %}">Cerrar sesion</a></li>
                 {%else%}
                 <li><a class="dropdown-item" href="{% url 'login' %}">Iniciar sesion</a></li>

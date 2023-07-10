@@ -18,6 +18,7 @@ from datetime import datetime
 def mostrar_admin(request):
     return render(request, 'base/admin_site.html')
 
+@login_required
 def agregar_carrito(request, fumo_id):
     if request.method == 'POST':
         fumo = fumos_app.FumoModel.objects.get(id=fumo_id)
@@ -209,6 +210,7 @@ def mostrar_registro(request):
             return render(request, 'registro.html', contexto)
     return render(request, 'registro.html')
 
+@login_required
 def cerrar_sesion(request):
     if request.user.is_authenticated:
         logout(request)
