@@ -25,7 +25,6 @@ def agregar_carrito(request, fumo_id):
         try:
             cart_user = ShoppingCartModel.objects.get(user_id=request.user.id, status="Pendiente")
             ammount = int(request.POST.get('ammount'))
-            contexto = {}
             last_cart = ShoppingCartModel.objects.filter(user_id=request.user.id).order_by('-creation_date').first()
             if cart_user.status == 'Pendiente':
                 for n in range(ammount):
@@ -36,10 +35,6 @@ def agregar_carrito(request, fumo_id):
                         user=usuario
                         )
                         new_detail.save()
-                    else:
-                        contexto = {
-                        'mensaje_error': 'Se ha excedido el limite de productos. Solo se han agregado 10'
-                    }
             else:
                 new_cart = ShoppingCartModel(
                 creation_date= datetime.now(),
@@ -55,10 +50,6 @@ def agregar_carrito(request, fumo_id):
                         user=usuario
                         )
                         new_detail.save()
-                    else:
-                        contexto = {
-                            'mensaje_error': 'Se ha excedido el limite de productos. Solo se han agregado 10'
-                        }
         except ObjectDoesNotExist:
             ammount = int(request.POST.get('ammount'))
             new_cart = ShoppingCartModel(
@@ -76,10 +67,6 @@ def agregar_carrito(request, fumo_id):
                     user=usuario
                     )
                     new_detail.save()
-                else:
-                    contexto = {
-                        'mensaje_error': 'Se ha excedido el limite de productos. Solo se han agregado 10'
-                    }
     return redirect('productos')
 
 @login_required
