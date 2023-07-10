@@ -30,7 +30,7 @@ class RegistroForm(BaseUserCreationForm):
         self.fields['first_name'].required = True
         self.fields['last_name'].required = True
         self.fields['password1'] = CharField(help_text="La contraseña debe tener minimo 8 caracteres, y debe incluir mayuscula")
-        self.fields['password2']= CharField(help_text="Su contraseña no puede ser completamente numerica")
+        self.fields['password2']= CharField(help_text="Su contraseña no puede ser completamente numerica, ni asemejarse a su informacion personal")
         self.fields['password1'].widget = PasswordInput(attrs = { 'class': 'form-control'})
         self.fields['password2'].widget = PasswordInput(attrs = { 'class': 'form-control'})
 
