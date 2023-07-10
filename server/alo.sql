@@ -39,3 +39,16 @@ INSERT INTO usuario_app_regionmodel (id, region_name) VALUES
 INSERT INTO usuario_app_communemodel (id, commune_name, region_id) VALUES
 (1, 'SAN BERNARDO'),
 (2, 'PEÑAFLOR');
+
+CREATE TRIGGER limintar_inserciones
+BEFORE INSERT ON usuario_app_fumomodel
+FOR EACH ROW
+BEGIN
+    DECLARE total_rows INT;
+    SELECT COUNT(*) INTO total_rows FROM usuario_app_fumomodel;
+    
+    IF total_rows >= 50 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Se ha alcanzado el límite de inserciones.';
+    END IF;
+END;
