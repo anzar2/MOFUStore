@@ -1,0 +1,51 @@
+{% extends 'base/admin_site.html' %}
+{%load static%}
+{%block contenido_admin%}
+<section style="margin-left: 300px;">
+    <div class="container-sm">
+        <h1 class="fw-light mb-5">Panel de administracion MOFU Store</h1>
+        <section style="max-width: 72%;" class="mt-1">
+            <h2 class="fw-light">Administrar productos</h2>
+            <section class="row">
+                <article class="col-6 my-3">
+                    <div class="p-1 card option">
+                        <div class="card-body">
+                            <h4 class="card-title">Agregar un producto</h4>
+                            <p class="card-text fw-light">Agrega un producto a la tienda</p>
+                            <div class="d-flex justify-content-end">
+                                <a href="{% url 'agregar_producto' %}" class="btn btn-primary"><img src="{% static 'svg/arrow-right.svg' %}" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <article class="col-6 my-3">
+                    <div class="p-1 card option">
+                        <div class="card-body">
+                            <h4 class="card-title">Modificar o eliminar un producto</h4>
+                            <p class="card-text">Modifica un producto a la tienda, o eliminalo si lo necesitas</p>
+                            <div class="d-flex justify-content-end">
+                                <a href="{% url 'admin_productos' %}" class="btn btn-primary"><img src="{% static 'svg/arrow-right.svg' %}" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </section>
+        <section class="mt-5" style="max-width: 72%;">
+            <h2 class="fw-light">Administrar usuarios</h2>
+            <section class="row">
+                <article class="col-6 my-3">
+                    <div class="p-1 card option">
+                        <div class="card-body">
+                            <h4 class="card-title">Asignar privilegios</h4>
+                            <p class="card-text">Asigna privilegios a los usuarios para que puedan acceder a la administracion del sistema</p>
+                            <div class="d-flex justify-content-end">
+                                <a href="{% url 'mostrar_privilegios' %}" class="btn btn-primary"><img src="{% static 'svg/arrow-right.svg' %}" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </section>
+        </section>
+    </div>
+</section>
+{%endblock contenido_admin%}

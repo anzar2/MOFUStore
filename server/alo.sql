@@ -32,3 +32,10 @@ VALUES
 (3, 'Puppet'),
 (4, 'Strap'),
 (5, 'Deka');
+
+INSERT INTO usuario_app_regionmodel (id, region_name) VALUES 
+(1, 'METROPOLITANA DE SANTIAGO');
+
+INSERT INTO usuario_app_communemodel (id, commune_name, region_id) VALUES
+(1, 'SAN BERNARDO'),
+(2, 'PEÑAFLOR');

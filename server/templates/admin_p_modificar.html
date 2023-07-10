@@ -1,0 +1,47 @@
+{% extends 'base/admin_site.html' %}
+{%load static%}
+{%block contenido_admin%}
+<section style="margin-left: 300px;">
+    <div class="container-sm">
+        <form action="" method="post" enctype="multipart/form-data">
+            {%csrf_token%}
+            <div class="row">
+                <div class="col-6">
+                    <label for="fumo_name">Nombre del producto:</label>{{ formulario.fumo_name }}
+                </div>
+                <div class="col-6">
+                    <label for="release_year">Año de lanzamiento:</label>{{ formulario.release_year }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label for="fumo_price">Precio:</label>{{ formulario.fumo_price }}
+                </div>
+                <div class="col-6">
+                    <label for="release_year">Stock</label>{{ formulario.stock}}
+                    <p class="fw-light text-secondary">{{formulario.fumo_stock.help_text}} </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label for="fumo_size">Tamaño:</label>{{ formulario.fumo_size }}
+                    <p class="fw-light text-secondary">{{formulario.fumo_size.help_text}} </p>
+                </div>
+                <div class="col-6">
+                    <label for="image">Imagen del producto:</label>{{ formulario.url_img}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label for="series">Serie:</label>{{ formulario.fumo_serie}}
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-3">
+                    <button class="btn btn-primary" type="submit">Modificar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+{%endblock contenido_admin%}

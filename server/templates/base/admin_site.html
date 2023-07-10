@@ -1,0 +1,46 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block titulo %}
+MOFU Store | Panel Administrador
+{% endblock titulo %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/navstyles.css' %}">
+<link rel="stylesheet" href="{% static 'css/adminstyles.css' %}">
+{% endblock styles %}
+{% block contenido %}
+{% if user.is_staff %}
+    <header>
+        {% include 'base/navbar_base_admin.html' %}
+    </header>
+    <main>
+        <nav class="left-bar bg-dark">
+            <a href="{% url 'index' %}">
+                <img class="logo-img" src="{% static 'img/Logo_page.png' %}" alt="">
+            </a>
+            <h3 class="text-secondary mb-5">
+                Panel administrador
+                {%if user.is_superuser%} (Super Usuario)  {%endif%}
+            </h3>
+            <section class="fumos mb-5">
+                <h5 class="text-secondary">Productos</h5>
+                <ul class="nav">
+                    <li><a href="{% url 'agregar_producto' %}" class="btn text-secondary" name="nav-btn">Agregar un producto</a></li>
+                    <li><a href="{% url 'admin_productos' %}" class="btn text-secondary" name="nav-btn">Modificar o eliminar un producto</a></li>
+                </ul>
+            </section>
+            <section class="users">
+                <h5 class="text-secondary">Usuarios</h5>
+                <ul class="nav">
+                    <li><a href="{% url 'mostrar_privilegios' %}" class="btn text-secondary" name="nav-btn">Asignar privilegios</a></li>
+                </ul>
+            </section>
+        </nav>
+    {% block contenido_admin %}
+    {% endblock contenido_admin %}
+    </main>
+    <footer class="mt-5"></footer>
+{%else%}
+    <h6 class="fw-light text-danger">No tienes los privilegios necesarios, contactate con el administrador</h6>
+{%endif%}
+{% endblock contenido %}
+

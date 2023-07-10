@@ -1,6 +1,4 @@
 from django.urls import path, include
-from django.conf import settings
-from django.conf.urls.static import static
 
 from .views import (
     mostrar_login,
@@ -21,5 +19,6 @@ urlpatterns = [
     path('compra_realizada/', mostrar_c_realizada, name='compra_realizada'),
     path('compra_cancelada/', mostrar_c_cancelada, name='compra_cancelada'),
     path('cerrar_sesion/', cerrar_sesion, name='cerrar_sesion'),
-    path('quitar_item_carro/<int:fumo_id>/<int:shopping_cart_id>', quitar_item_carrito, name='quitar_item')
+    path('quitar_item_carro/<int:fumo_id>/<int:shopping_cart_id>', quitar_item_carrito, name='quitar_item'),
+    path('admin/', include('admin_app.urls'))
 ]

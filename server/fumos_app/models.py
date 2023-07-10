@@ -10,6 +10,8 @@ from django.db.models import (
 from django.contrib.auth.models import User
 
 class FumoSeriesModel(Model):
+    def __str__(self):
+        return self.name_series
     name_series = CharField(max_length=45, null=False, blank=False)
 
 class FumoModel(Model):

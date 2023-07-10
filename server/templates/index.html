@@ -28,13 +28,19 @@ MOFU Store | Home
         <section id="fumo-carousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <item class="carousel-item active">
-                    <img src="{% static '/img/carousel-1.png' %}" alt="" class="w-100">
+                    <img src="{% static '/img/carousel-1.png' %}" alt="" width="1920" height="1080" class="w-100 object-fit-cover">
                 </item>
                 <item class="carousel-item">
-                    <img src="{% static '/img/carousel-2.png' %}" alt="" class="w-100">
+                    <img src="{% static '/img/carousel-2.png' %}" alt="" width="1920" height="1080" class="w-100 object-fit-cover">
                 </item>
                 <item class="carousel-item">
-                    <img src="{% static '/img/carousel-3.png' %}" alt="" class="w-100">
+                    <img src="{% static '/img/carousel-3.png' %}" alt="" width="1920" height="1080" class="w-100 object-fit-cover">
+                </item>
+                <item class="carousel-item">
+                    <img src="{% static '/img/carousel-4.png' %}" alt="" width="1920" height="1080" class="w-100 object-fit-cover">
+                </item>
+                <item class="carousel-item">
+                    <img src="{% static '/img/carousel-5.png' %}" alt="" width="1920" height="1080" class="w-100 object-fit-cover">
                 </item>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#fumo-carousel" data-bs-slide="prev">
@@ -54,30 +60,30 @@ MOFU Store | Home
         <h2 class="text-center" style="font-family: 'Roboto', sans-serif;">Tipos de Fumos disponibles</h2>
         <div class="row py-3">
             <article class="categoria col-2 offset-1">
-                <a href="" class="categoria-link">
+                <a href="{% url 'filtro_deka' %}" class="categoria-link">
                     <img src="{% static 'img/icons/5_deka.png' %}" alt="" class="categoria-img">
                 </a>
             </article>
             <article class="categoria col-2">
-                <a href="" class="categoria-link">
+                <a href="{% url 'filtro_fumo' %}" class="categoria-link">
 
                     <img src="{% static 'img/icons/1_fumo.png' %}" alt="" class="categoria-img">
                 </a>
             </article>
             <article class="categoria col-2">
-                <a href="" class="categoria-link">
+                <a href="{% url 'filtro_nendoroid' %}" class="categoria-link">
 
                     <img src="{% static 'img/icons/2_nendoroid.png' %}" alt="" class="categoria-img">
                 </a>
             </article>
             <article class="categoria col-2">
-                <a href="" class="categoria-link">
+                <a href="{% url 'filtro_puppet' %}" class="categoria-link">
 
                     <img src="{% static 'img/icons/3_puppet.png' %}" alt="" class="categoria-img">
                 </a>
             </article>
             <article class="categoria col-2">
-                <a href="" class="categoria-link">
+                <a href="{% url 'filtro_strap' %}" class="categoria-link">
 
                     <img src="{% static 'img/icons/4_strap.png' %}" alt="" class="categoria-img">
                 </a>
@@ -109,6 +115,7 @@ MOFU Store | Home
                 </div>
 
                 <div class="col-md-6">
+
                     <h2 class="text-center text-light" style="font-family: 'Roboto', sans-serif;">¿Quienes somos? </h2>
 
                     <h5 class="text-light" style="font-family: 'Barlow Condensed', sans-serif;">Somos dos estudiantes entusiastas del instituto Duoc UC, ubicado en la sede de San Bernardo, Chile. Estamos emocionados de compartir contigo nuestra historia y pasión por la programación.</h5>
@@ -138,15 +145,67 @@ MOFU Store | Home
             </div>
     </section>
 
+    <section class="banner">
+        <div class="container">
+
+            <div class="row">
+
+            <h2 class="text-center" style="font-family: 'Roboto', sans-serif;">Una pequeña sección de agradecimientos </h2>
+
+
+
+            <div class="col-md-6 ">
+
+                <h4 style="font-family: 'Barlow Condensed', sans-serif;"> Quiero aprovechar este espacio para expresar mi profundo agradecimiento a todas las personas y páginas que han contribuido de manera invaluable a nuestro proyecto de los Fumos de Touhou Project.</h5>
+
+                <h4 style="font-family: 'Barlow Condensed', sans-serif;"> En primer lugar, quiero agradecer a los miembros de la A$TR0_G4NG por su apoyo constante, su valiosa retroalimentación y su entusiasmo inquebrantable. Su apoyo ha sido fundamental para impulsar nuestro proyecto hacia adelante y nos ha motivado a dar lo mejor de nosotros.</h5>
+
+            </div>
+
+            <div class="col-md-6 ">
+
+                <img src="{% static 'img/agradecimientos/funky.gif' %}" alt="Foto">
+                <h4 class="text-center" style="font-family: 'Barlow Condensed', sans-serif;">Un saludito a mi grupo jajaja</h4>
+
+            </div>
+
+            <div class="col-md-6 ">
+
+                <h4 style="font-family: 'Barlow Condensed', sans-serif;"> Además, deseo expresar mi gratitud a las páginas que nos han proporcionado información y referencias importantes para desarrollar nuestro proyecto. En especial, quiero agradecer a www.fumo.website.com y www.gift-gift.jp por su contenido informativo y por servir como fuentes de inspiración para la creación de nuestra tienda de Fumos.</h5>
+
+
+            </div>
+
+
+            <div class="col-md-6 ">
+
+
+                <h4 class="text-center" style="font-family: 'Barlow Condensed', sans-serif;"> Sin el apoyo, el conocimiento y las referencias que hemos recibido de estas personas y páginas, nuestro proyecto no habría sido posible. Estamos sinceramente agradecidos por su contribución y por ser parte de esta increíble aventura de los Fumos de Touhou Project.</h5>
+
+
+            </div>
+
+
+            <div class="col-md-12 ">
+
+
+                <h4 class="text-center" style="font-family: 'Barlow Condensed', sans-serif;"> Gracias a todos por su apoyo, su confianza y por formar parte de este emocionante viaje con nosotros.</h5>
+
+            </div>
+
+
+
+            
+
+            <h4 class="text-center" style="font-family: 'Barlow Condensed', sans-serif;">Con gratitud,
+                Marcos Reyes "Marcus".</h4>
+
+    </section>
     
     
 
 </main>
-<footer>
-<form action="" method="post" enctype="multipart/form-data">
-    {%csrf_token%}
-    {{ form.image }} <button type="submit">Enviar</button>
-</form>
-</footer>
-{% endblock contenido %}
 
+{% include 'base/footer_base.html' %}
+
+{% endblock contenido %}

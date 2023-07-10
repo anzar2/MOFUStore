@@ -1,0 +1,26 @@
+{% load static %}
+<nav class="bg-dark p-2" style="margin-left: 300px;">
+    <div class="d-flex">
+        <section class="d-flex">
+            <section class="d-flex">
+                <a href="{% url 'admin' %}" class="nav-link text-light me-3">Inicio</a>
+                <a href="{% url 'index'%}" class="nav-link text-light me-3">Tienda</a>
+                <a href="{% url 'productos' %}" class="nav-link text-light me-3" target="_blank">Productos</a>
+            </section>
+            <button class="nav-link me-3 text-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            {% if user.is_staff %}
+                <img src="{% static 'svg/shield-fill.svg' %}" alt="">
+            {%endif%}
+            {% if user.is_authenticated %}
+                {{ user.first_name }}
+            {%endif%}
+        </button>
+        <ul class="dropdown-menu">
+            {% if user.is_authenticated %}
+            <li><a class="dropdown-item" href="{% url 'cerrar_sesion' %}">Cerrar sesion</a></li>
+            {%endif%}
+        </ul>
+        </section>
+    </div>
+</nav>

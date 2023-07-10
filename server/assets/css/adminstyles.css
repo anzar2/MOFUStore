@@ -1,0 +1,26 @@
+.left-bar{
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1001;
+    padding: 10px;
+    max-width: 300px;
+    height: 100vh;
+}
+li{
+    color: white;
+}
+a[name="nav-btn"]{
+    transition: 0.3s;
+}
+a[name="nav-btn"]:hover{
+    color: white !important;
+    background-color: #3b4249;
+}
+.option{
+    height: 200px;
+    transition: 0.5s;
+}
+.option:hover{
+    transform: scale(1.03);
+}

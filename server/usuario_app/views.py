@@ -8,62 +8,60 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.db.models import Count, Sum
 import fumos_app.models as fumos_app
-from .forms import CartForm
 from .models import (
     CartDetailModel,
     ShoppingCartModel
 )
 from datetime import datetime
 
+@login_required
+def mostrar_admin(request):
+    return render(request, 'base/admin_site.html')
+
 def agregar_carrito(request, fumo_id):
     if request.method == 'POST':
         fumo = fumos_app.FumoModel.objects.get(id=fumo_id)
         usuario = User.objects.get(id=request.user.id)
-        cart_form = CartForm(request.POST)
-        if cart_form.is_valid():
-            try:
-                cart_user = ShoppingCartModel.objects.get(user_id=request.user.id, status="Pendiente")
-                ammount = cart_form.cleaned_data['ammount']
-                contexto = {
-                    'fumo_id': fumo,
-                    'ammount': ammount
-                }
-                last_cart = ShoppingCartModel.objects.filter(user_id=request.user.id).order_by('-creation_date').first()
-                if cart_user.status == 'Pendiente':
-                    for n in range(ammount):
-                        new_detail = CartDetailModel(
-                        fumo=fumo,
-                        shopping_cart=last_cart,
-                        user=usuario
-                        )
-                        new_detail.save()
-                else:
-                    new_cart = ShoppingCartModel(
-                    creation_date= datetime.now(),
-                    status="Pendiente",
-                    user = usuario
-                    )
-                    new_cart.save()
-
-            except ObjectDoesNotExist:
-                ammount = cart_form.cleaned_data['ammount']
-                contexto = {'fumo_id': fumo,'ammount': ammount}
-                new_cart = ShoppingCartModel(
-                    creation_date= datetime.now(),
-                    status="Pendiente",
-                    user = usuario
-                )
-                new_cart.save()
-
+        try:
+            cart_user = ShoppingCartModel.objects.get(user_id=request.user.id, status="Pendiente")
+            ammount = int(request.POST.get('ammount'))
+            contexto = {
+                'fumo_id': fumo,
+                'ammount': ammount
+            }
+            last_cart = ShoppingCartModel.objects.filter(user_id=request.user.id).order_by('-creation_date').first()
+            if cart_user.status == 'Pendiente':
                 for n in range(ammount):
                     new_detail = CartDetailModel(
                     fumo=fumo,
-                    shopping_cart=new_cart,
+                    shopping_cart=last_cart,
                     user=usuario
                     )
                     new_detail.save()
-                
-    return render(request, 'compras.html', contexto)
+            else:
+                new_cart = ShoppingCartModel(
+                creation_date= datetime.now(),
+                status="Pendiente",
+                user = usuario
+                )
+                new_cart.save()
+        except ObjectDoesNotExist:
+            ammount = int(request.POST.get('ammount'))
+            new_cart = ShoppingCartModel(
+                creation_date= datetime.now(),
+                status="Pendiente",
+                user = usuario
+            )
+            new_cart.save()
+
+            for n in range(ammount):
+                new_detail = CartDetailModel(
+                fumo=fumo,
+                shopping_cart=new_cart,
+                user=usuario
+                )
+                new_detail.save()
+    return render(request, 'compras.html')
 
 @login_required
 def mostrar_c_realizada(request):
@@ -78,7 +76,14 @@ def mostrar_c_realizada(request):
         cart_user.save()
         return render(request, 'compra_confirmada.html')
     except:
-        return redirect('index')
+        if datos['ammount'] > fumo.stock:
+            contexto = {
+                'mensaje_error': f'No es posible realizar la compra,  la cantidad es superior al stock, la transaccion se ha cancelado.'
+            }
+        cart_user = ShoppingCartModel.objects.get(user_id=request.user.id, status="Pendiente")
+        cart_user.status = "Cancelado"
+        cart_user.save()
+        return render(request, 'carrito.html', contexto)
 @login_required
 def mostrar_c_cancelada(request):
     try:

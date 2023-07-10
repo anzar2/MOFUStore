@@ -16,7 +16,7 @@ from .models import (
     CommuneModel,
     RegionModel,
 )
-
+from .data import COMUNA_DATA, REGION_DATA
 class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kargs):
         super().__init__(*args, **kargs)
@@ -62,40 +62,23 @@ class RegistroForm(BaseUserCreationForm):
             }
         )
     )
-    try:
-        COMUNA_DATA = [(comuna.id, comuna.commune_name) for comuna in CommuneModel.objects.all()]
-        REGION_DATA = [(region.id, region.region_name) for region in RegionModel.objects.all()]
-        commune = ChoiceField(
-            required=True,
-            choices=COMUNA_DATA,
-            widget= Select(
-                attrs={
-                    'class': 'form-select'
-                }
-            )
-        )
-        region = ChoiceField(
-            required=True,
-            choices=REGION_DATA,
-            widget= Select(
-                attrs={
-                    'class': 'form-select'
-                }
-            )
-        )
-    except ProgrammingError as e:
-        print(f"ADVERTENCIA: {str(e)}, pero es normal ya que se intenta acceder a los datos de CommuneModel, y RegionModel. Se continuará con el proceso (Esto no afecta al sistema)")
 
-class CartForm(Form):
-    ammount = IntegerField(
+    commune = ChoiceField(
         required=True,
-        max_value=99,
-        min_value=1,
-        widget= NumberInput(
-            attrs= {
-                'class': 'form-control',
-                'name': 'cart_form',
-                'id': 'cart_form'
+        choices=COMUNA_DATA,
+        widget= Select(
+            attrs={
+                'class': 'form-select'
             }
         )
     )
+    region = ChoiceField(
+        required=True,
+        choices=REGION_DATA,
+        widget= Select(
+            attrs={
+                'class': 'form-select'
+            }
+        )
+    )
+    

@@ -45,6 +45,7 @@ MOFU Store | Mi carro
     </div>
     {%else%}
     <div>
+        <span class="fw-light text-danger">{{mensaje_error}}</span>
         <h3 class="text-secondary">Aun no tienes productos en tu carro :(</h3>
         <div>
             <a href="{% url 'productos' %}" class="btn btn-primary">Ir a la tienda</a>

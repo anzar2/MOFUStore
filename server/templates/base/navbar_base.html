@@ -18,13 +18,11 @@
                         <li><a class="dropdown-item" href="{% url 'filtro_puppet' %}">Puppet</a></li>
                         <li><a class="dropdown-item" href="{% url 'filtro_strap' %}">Strap</a></li>
                     </ul>
-
                 </section>
             </section>
         </section>
 
         <section class="d-flex justify-content-center">
-
             <section >
                 <form action="{% url 'buscar' %}" class="input-s-container">
                     <input type="text" placeholder="Buscar" class="input-search" name="search">
@@ -33,20 +31,25 @@
                     </button>
                 </form>
             </section>
-
         </section>
 
         <section class="d-flex align-items-center">
             <button class="nav-link me-3 text-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
+                {% if user.is_staff %}
+                    <img src="{% static 'svg/shield-fill.svg' %}" alt="">
+                {%endif%}
                 {% if user.is_authenticated %}
-                {{ user.first_name }}
+                    {{ user.first_name }}
                 {%else %}
                 Mi cuenta
                 {%endif%}
             </button>
             <ul class="dropdown-menu">
                 {% if user.is_authenticated %}
+                    {% if user.is_staff %}
+                        <li><a class="dropdown-item" href="{% url 'admin' %}">Administrar pagina</a></li>
+                    {% endif %}
                 <li><a class="dropdown-item" href="">Mis compras</a></li>
                 <li><a class="dropdown-item" href="{% url 'cerrar_sesion' %}">Cerrar sesion</a></li>
                 {%else%}

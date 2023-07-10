@@ -1,0 +1,62 @@
+{% extends 'base/admin_site.html' %}
+{%load static%}
+{%block contenido_admin%}
+<section style="margin-left: 300px;">
+    <div class="container-sm">
+        <form action="{% url 'admin_buscar' %}" class="d-flex">
+            <button class="" type="submit">
+                <img src="{% static 'svg/search.svg' %}" alt="">
+            </button>
+            <input type="text" placeholder="Buscar" class="" name="search-admin">
+        </form>
+        <table class="table table-hover">
+            <th>Nº</th>
+            <th>Nombre producto</th>
+            <th>Año</th>
+            <th>Precio unitario</th>
+            <th>Tamaño</th>
+            <th>Tipo</th>
+            <th>Stock</th>
+            <th></th>
+            {% for fumo in fumo_model %}
+            <tr>
+                <td>{{fumo.id}}</td>
+                <td>{{fumo.fumo_name}}</td>
+                <td>{{fumo.release_year}}</td>
+                <td>{{fumo.fumo_price}}</td>
+                <td>{{fumo.fumo_size}}</td>
+                <td>{{fumo.fumo_serie__name_series}}</td>
+                <td>{{fumo.stock}}</td>
+                <td>
+                    <a href="{% url 'modificar_producto' fumo.id %}" class="btn btn-primary">Modificar</a>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal{{fumo.id}}">
+                        <img src="{%static 'svg/trash-fill.svg' %}" alt="">
+                    </button>
+                </td>
+            </tr>
+            <!-- Modal para eliminar-->
+            <div class="modal fade" id="exampleModal{{ fumo.id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel{{ fumo.id }}">¿Estas seguro?</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="fw-bold">Estas a punto de eliminar:</p> <br> {{fumo.fumo_name}}
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{% url 'eliminar_producto' fumo.id  %}" class="btn btn-secondary">Confirmar</a>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+        </table>
+    </div>
+</section>
+</section>
+{%endblock contenido_admin%}

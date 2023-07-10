@@ -34,12 +34,13 @@ MOFU Store | Packs MOFU
   }
 </style>
 <section class="py-5">
+  <h1 class="text-center">Productos disponibles</h1>
   <div class="container px-4 px-lg-5 mt-5">
     <div class="d-flex flex-wrap justify-content-center">
       {% for fumo in fumo_model %}
       <div class="product-card">
         <div class="card h-100">
-          <img class="card-img-top" src="{% static fumo.url_img.url %}" alt="..." />
+          <img class="card-img-top object-fit-cover border rounded" src="{% static fumo.url_img.url %}" alt="..." width="310" height="310">
           <div class="card-body p-4">
             <div class="text-center">
               <a href="">
@@ -49,7 +50,7 @@ MOFU Store | Packs MOFU
             </div>
           </div>
           <div class="text-center">
-          {% if fumo.stock > 1 %}
+          {% if fumo.stock > 0 %}
               <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                 data-bs-target="#staticBackdrop{{ fumo.id }}">
                 Agregar al carrito
@@ -77,7 +78,7 @@ MOFU Store | Packs MOFU
                             <p class="fw-bold">Precio unitario: <span class="fw-normal">${{ fumo.fumo_price }}</span></p>
                           </div>
                           <div class="col-12">
-                            <label for="cart_form">Cantidad:</label>{{ cart_form.ammount }}
+                            <label for="ammount">Cantidad:</label><input type="number" name="ammount" id="ammount" class="form-control" max="{{fumo.stock}}" min="1">
                           </div>
                         </div>
                       </div>
@@ -90,9 +91,7 @@ MOFU Store | Packs MOFU
                 </div>
               </div>
             </div>
-          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center"><a class="btn btn-secondary mt-auto" href="#">Ver detalles</a></div>
-          </div>
+          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent"></div>
         </div>
       </div>
       {%endfor%}
@@ -100,4 +99,6 @@ MOFU Store | Packs MOFU
     </div>
   </div>
 </section>
+{% include 'base/footer_base.html' %}
+
 {% endblock contenido %}

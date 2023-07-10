@@ -1,0 +1,12 @@
+{% extends 'base/admin_site.html' %}
+{%load static%}
+{%block contenido_admin%}
+<section style="margin-left: 300px;">
+    <div class="container-sm">
+        <form action="" method="post">
+            {%csrf_token%}
+            {{formulario.is_staff}}
+        </form>
+    </div>
+</section>
+{%endblock contenido_admin%}

@@ -1,0 +1,77 @@
+{% extends 'base/admin_site.html' %}
+{%load static%}
+{%block contenido_admin%}
+<section style="margin-left: 300px;">
+    <div class="container-sm">
+        <table class="table table-hover">
+            <th>Nº</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Es Staff</th>
+            <th></th>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{usuario.id}}</td>
+                <td>
+                    {%if usuario.id == usuario_sesion %}
+                    {{usuario.first_name|upper}} {{usuario.last_name|upper}} <b>(Tú)</b>
+                    {%else%}
+                    {{usuario.first_name|upper}} {{usuario.last_name|upper}}
+                    {%endif%}
+                </td>
+                <td>{{usuario.email}}</td>
+                <td>
+                    {%if usuario.is_staff %}
+                        Si
+                    {%else%}
+                        No
+                    {%endif%}
+                </td>
+                <td>
+                    {%if usuario.id == usuario_sesion %}
+                        <button disabled class="btn btn-secondary">Cambiar</button>
+                    {%else%}
+                        <a href="{% url 'modificar_usuario' usuario.id %}" class="btn btn-primary">Cambiar</a>
+                    {%endif%}
+                    {%if user.is_superuser%}
+                        {%if usuario.id == usuario_sesion %}
+                        <button disabled class="btn btn-secondary">
+                            <img src="{%static 'svg/trash-fill.svg' %}" alt="">
+                        </button>
+                        {%else%}
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal{{usuario.id}}">
+                            <img src="{%static 'svg/trash-fill.svg' %}" alt="">
+                        </button>
+                        {%endif%}
+                    {%endif%}
+                </td>
+            </tr>
+            <!-- Modal para eliminar-->
+            <div class="modal fade" id="exampleModal{{ usuario.id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel{{ usuario.id }}">¿Estas seguro?</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="fw-bold">Estas a punto de eliminar:</p> <br> {{usuario.first_name|upper}} {{ usuario.last_name|upper}}
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{% url 'eliminar_usuario' usuario.id %}" class="btn btn-secondary">Confirmar</a>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+        </table>
+        {%if user.is_superuser%}
+            <h5 class="fw-light text-secondary">* Puedes ver la opcion eliminar porque eres superusuario</h5>
+        {%endif%}
+    </div>
+</section>
+</section>
+{%endblock contenido_admin%}

@@ -1,0 +1,9 @@
+COMUNA_DATA = [
+    ("", "SELECCIONA"),
+    (1, "SAN BERNARDO"),
+    (2, "PEÑAFLOR"),
+]
+REGION_DATA = [
+    ("","SELECCIONA"),
+    (1, "METROPOLITANA DE SANTIAGO")
+]
