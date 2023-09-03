@@ -80,12 +80,8 @@ WSGI_APPLICATION = 'server.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'fercatalan',
-        'HOST': '164.152.54.1',
-        'PORT': 3306,
-        'USER': 'fer.catalan',
-        'PASSWORD': 'Fer.catalan_2023'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
     }
 }
 
